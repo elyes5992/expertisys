@@ -1,4 +1,4 @@
-import React, { useState,useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   AppBar, 
   Toolbar, 
@@ -11,7 +11,6 @@ import {
   ListItemText, 
   Container, 
   ListItemIcon, 
-  // --- NEW --- Imports for mobile responsiveness
   useTheme, 
   useMediaQuery, 
   IconButton, 
@@ -19,99 +18,81 @@ import {
   Collapse,
   Divider
 } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+// --- MODIFIED --- Import useLocation
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 // --- Import Icons ---
-import logo from '../assets/logoo.png'; 
-import { KeyboardArrowDown, ExpandLess, ExpandMore } from '@mui/icons-material'; // --- NEW --- Added Expand icons
+import logo from '../assets/logo7.png'; 
+import { KeyboardArrowDown, ExpandLess, ExpandMore } from '@mui/icons-material';
 import SyncAltIcon from '@mui/icons-material/SyncAlt';
 import ArchitectureIcon from '@mui/icons-material/Architecture';
 import LanIcon from '@mui/icons-material/Lan';
-import MenuIcon from '@mui/icons-material/Menu'; // --- NEW --- Hamburger menu icon
-import CloseIcon from '@mui/icons-material/Close'; // --- NEW --- Close icon for drawer
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 
-// --- Updated services array (no changes here) ---
+// --- services array (no changes) ---
 const services = [
   { name: 'Ingénierie Mécanique Dynamique', path: '/services/mecanique-dynamique', icon: <SyncAltIcon /> },
   { name: 'Ingénierie Mécanique Statique', path: '/services/mecanique-statique', icon: <ArchitectureIcon /> },
   { name: 'Telco, IT & Cybersécurité', path: '/services/telco-cybersecurite', icon: <LanIcon /> },
 ];
 
-// --- Animation variants for the desktop popover (no changes here) ---
+// --- Animation variants (no changes) ---
 const popoverListVariants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
 };
-
 const popoverItemVariants = {
   hidden: { y: 20, opacity: 0 },
   visible: { y: 0, opacity: 1 },
 };
-
-// --- NEW --- Animation variants for the mobile drawer for extra "pazazz"
 const drawerListVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1, // Each item will animate 0.1s after the previous one
+      staggerChildren: 0.1,
     },
   },
 };
-
 const drawerItemVariants = {
-  hidden: { x: -30, opacity: 0 }, // Slide in from the left
+  hidden: { x: -30, opacity: 0 },
   visible: { x: 0, opacity: 1, transition: { type: 'spring', stiffness: 100 } },
 };
 
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
-  // --- NEW --- State for mobile drawer
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  // --- NEW --- State for nested services list in mobile drawer
   const [servicesListOpen, setServicesListOpen] = useState(false);
 
   const timeoutRef = useRef(null);
-  
-  
   const navigate = useNavigate();
-
-  // --- NEW --- MUI hooks to handle responsiveness
   const theme = useTheme();
-  // This will be true if the screen width is less than the 'md' breakpoint (900px by default)
   const isMobile = useMediaQuery(theme.breakpoints.down('md')); 
 
-  const handlePopoverOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  // --- NEW --- Detect if we are on the home page
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
-  const handlePopoverClose = () => {
-    setAnchorEl(null);
-  };
-
-  // --- NEW --- Combined navigation handler to close popover and drawer
+  // --- handlers (no changes) ---
+  const handlePopoverOpen = (event) => setAnchorEl(event.currentTarget);
+  const handlePopoverClose = () => setAnchorEl(null);
   const handleNavigate = (path) => {
     navigate(path);
     handlePopoverClose();
-    setIsDrawerOpen(false); // Close drawer on navigation
+    setIsDrawerOpen(false);
   };
-
    const handlePopoverLeave = () => {
     timeoutRef.current = setTimeout(() => {
       handlePopoverClose();
-    }, 200); // 200ms delay before closing
+    }, 200);
   };
-
-  const handlePopoverContentEnter = () => {
-    clearTimeout(timeoutRef.current);
-  };
-
-  
+  const handlePopoverContentEnter = () => clearTimeout(timeoutRef.current);
   const openPopover = Boolean(anchorEl);
 
-  // --- NEW --- Component for the animated mobile drawer menu
+  // --- MobileDrawer (no changes required here) ---
   const MobileDrawer = (
     <Drawer
       anchor="right"
@@ -139,7 +120,6 @@ const Navbar = () => {
         style={{ flexGrow: 1 }}
       >
         <List>
-          {/* Mapping main nav links */}
           {[{ name: 'Accueil', path: '/' }, { name: 'A Propos', path: '/a propos' }].map((item) => (
             <motion.div key={item.name} variants={drawerItemVariants}>
               <ListItem disablePadding>
@@ -150,7 +130,6 @@ const Navbar = () => {
             </motion.div>
           ))}
           
-          {/* --- NEW --- Collapsible services list for mobile */}
           <motion.div variants={drawerItemVariants}>
             <ListItemButton onClick={() => setServicesListOpen(!servicesListOpen)}>
               <ListItemText primary="Nos Services" />
@@ -172,7 +151,6 @@ const Navbar = () => {
           </Collapse>
         </List>
 
-        {/* --- NEW --- Contact button styled at the bottom */}
         <Box sx={{ p: 2, mt: 'auto' }}>
             <motion.div variants={drawerItemVariants}>
                 <Button 
@@ -188,19 +166,19 @@ const Navbar = () => {
     </Drawer>
   );
 
-  // --- NEW --- Component for the desktop navigation links
+  // --- DesktopNav (with conditional styles) ---
   const DesktopNav = (
     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-      <Button color="primary" component={Link} to="/" sx={{ fontWeight: 'bold', fontSize: '1rem' }}>
+      {/* --- MODIFIED --- All buttons now have conditional color */}
+      <Button color={isHomePage ? 'inherit' : 'primary'} component={Link} to="/" sx={{ fontWeight: 'bold', fontSize: '1rem' }}>
         Accueil
       </Button>
-      
       
       <Box onMouseEnter={handlePopoverOpen} onMouseLeave={handlePopoverClose}>
         <Button
           aria-owns={openPopover ? 'mouse-over-popover' : undefined}
           aria-haspopup="true"
-          color="primary"
+          color={isHomePage ? 'inherit' : 'primary'}
           endIcon={<KeyboardArrowDown sx={{ transform: openPopover ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }} />}
           sx={{ fontWeight: 'bold', fontSize: '1rem' }}
         >
@@ -215,7 +193,6 @@ const Navbar = () => {
           onClose={handlePopoverClose}
           disableRestoreFocus
           disableScrollLock={true} 
-          // --- MODIFIED ---: Added mouse handlers to the Popover's Paper component
           PaperProps={{
             onMouseEnter: handlePopoverContentEnter,
             onMouseLeave: handlePopoverLeave,
@@ -230,6 +207,7 @@ const Navbar = () => {
             },
           }}
         >
+          {/* Popover content does not need color changes */}
           <motion.div variants={popoverListVariants} initial="hidden" animate="visible">
             <List sx={{ p: 1 }}>
               {services.map((service) => (
@@ -260,13 +238,14 @@ const Navbar = () => {
         </Popover>
       </Box>
 
-      <Button color="primary" component={Link} to="/a propos" sx={{ fontWeight: 'bold', fontSize: '1rem' }}>
+      <Button color={isHomePage ? 'inherit' : 'primary'} component={Link} to="/a propos" sx={{ fontWeight: 'bold', fontSize: '1rem' }}>
         A Propos
       </Button>
 
+      {/* --- MODIFIED --- Contact button has conditional variant and color */}
       <Button
-        variant="contained"
-        color="primary"
+        variant={isHomePage ? 'outlined' : 'contained'}
+        color={isHomePage ? 'inherit' : 'primary'}
         component={Link}
         to="/contact"
         sx={{ ml: 2, fontSize: '1rem' }}
@@ -277,18 +256,31 @@ const Navbar = () => {
   );
 
   return (
-    <AppBar position="sticky" sx={{ bgcolor: 'rgba(255, 255, 255, 0.79)', backdropFilter: 'blur(10px)', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+    // --- MODIFIED --- AppBar now has conditional styling
+    <AppBar 
+      // Use 'absolute' on home page to overlay hero, 'sticky' everywhere else
+      position={isHomePage ? 'absolute' : 'sticky'} 
+      sx={{
+        // On Home: transparent, no shadow. Other pages: original style.
+        bgcolor: isHomePage ? 'transparent' : 'rgba(255, 255, 255, 0.79)',
+        backdropFilter: isHomePage ? 'none' : 'blur(10px)',
+        boxShadow: isHomePage ? 'none' : '0 2px 4px rgba(0,0,0,0.1)',
+        // On Home: white text/icons. Other pages: let components decide (defaults to primary).
+        color: isHomePage ? 'white' : 'inherit',
+        top: 0,
+      }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
           <Link to="/">
             <Box component="img" sx={{ height: 80, cursor: 'pointer' }} alt="Expertisys Logo" src={logo} />
           </Link>
 
-          {/* --- NEW --- Conditional rendering based on screen size */}
           {isMobile ? (
             <>
               <IconButton
-                color="primary"
+                // --- MODIFIED --- Hamburger icon color is now conditional
+                color={isHomePage ? 'inherit' : 'primary'}
                 aria-label="open drawer"
                 edge="end"
                 onClick={() => setIsDrawerOpen(true)}

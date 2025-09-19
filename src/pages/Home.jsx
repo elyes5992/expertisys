@@ -42,7 +42,7 @@ const Home = () => {
         <Box
           sx={{
             pt: { xs: 12, md: 16 },
-            pb: { xs: 12, md: 21 }, // Padding is now just for content, not for making space for the banner
+            pb: { xs: 12, md: 35 }, // Padding is now just for content, not for making space for the banner
             background: `linear-gradient(45deg, rgba(13, 71, 161, 0.9) 0%, rgba(0, 33, 113, 0.85) 100%), url(${heroBg})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',

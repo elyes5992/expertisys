@@ -8,7 +8,9 @@ import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
+    {/* --- THIS IS THE ONLY CHANGE --- */}
+    {/* Add the basename prop with your repository name */}
+    <BrowserRouter basename="/expertisys">
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <App />
