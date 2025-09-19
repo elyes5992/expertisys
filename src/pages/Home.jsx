@@ -156,27 +156,14 @@ const Home = () => {
                   <CardMedia component="img" height="200" image={poleMobilitesImg} alt="Ingénierie Mécanique" />
                   <CardContent sx={{ p: 3, textAlign: 'center' }}>
                     <BuildIcon color="primary" sx={{ fontSize: 50, mb: 2 }} />
-                    <Typography variant="h4" component="h3" gutterBottom>Pôle Mobilités</Typography>
+                    <Typography variant="h4" component="h3" gutterBottom>Pôle Mobilités Mécaniques</Typography>
                     <Typography variant="body1" color="text.secondary">Expertise pointue pour constructeurs et équipementiers. Du cycle en V à la validation produit : carrosserie, powertrain et liaison au sol.</Typography>
                   </CardContent>
                 </CardActionArea>
               </Card>
             </motion.div>
           </Grid>
-          <Grid size={{xs:12 ,md:4}}>
-            <motion.div whileHover={{ y: -10, scale: 1.02 }} transition={{ type: "spring", stiffness: 300 }}>
-              <Card sx={{ height: '100%', borderRadius: '16px', transition: 'border-color 0.3s ease, box-shadow 0.3s ease', border: '2px solid transparent', '&:hover': { borderColor: 'secondary.main', boxShadow: '0 10px 30px -10px rgba(79, 195, 247, 0.5)' } }}>
-                <CardActionArea onClick={() => navigate('/services/telco-cybersecurite')}>
-                  <CardMedia component="img" height="200" image={poleTelcoImg} alt="Télécommunications et Cybersécurité" />
-                  <CardContent sx={{ p: 3, textAlign: 'center' }}>
-                    <NetworkCheckIcon color="primary" sx={{ fontSize: 50, mb: 2 }} />
-                    <Typography variant="h4" component="h3" gutterBottom>Pôle Telco & IT</Typography>
-                    <Typography variant="body1" color="text.secondary">Haut niveau d'expertise pour opérateurs et intégrateurs. Performance, résilience et conformité de l'architecture à la sécurisation des systèmes.</Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </motion.div>
-          </Grid>
+         
           <Grid size={{xs:12 ,md:4}}>
             <motion.div whileHover={{ y: -10, scale: 1.02 }} transition={{ type: "spring", stiffness: 300 }}>
               <Card sx={{ height: '100%', borderRadius: '16px', transition: 'border-color 0.3s ease, box-shadow 0.3s ease', border: '2px solid transparent', '&:hover': { borderColor: 'secondary.main', boxShadow: '0 10px 30px -10px rgba(79, 195, 247, 0.5)' } }}>
@@ -186,6 +173,20 @@ const Home = () => {
                     <ArchitectureIcon color="primary" sx={{ fontSize: 50, mb: 2 }} />
                     <Typography variant="h4" component="h3" gutterBottom>Pôle Statique & Structure</Typography>
                     <Typography variant="body1" color="text.secondary">Analyses structurelles par éléments finis (FEA), études de durabilité (fatigue) et analyses vibratoires (NVH) pour garantir la robustesse des produits.</Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </motion.div>
+          </Grid>
+           <Grid size={{xs:12 ,md:4}}>
+            <motion.div whileHover={{ y: -10, scale: 1.02 }} transition={{ type: "spring", stiffness: 300 }}>
+              <Card sx={{ height: '100%', borderRadius: '16px', transition: 'border-color 0.3s ease, box-shadow 0.3s ease', border: '2px solid transparent', '&:hover': { borderColor: 'secondary.main', boxShadow: '0 10px 30px -10px rgba(79, 195, 247, 0.5)' } }}>
+                <CardActionArea onClick={() => navigate('/services/telco-cybersecurite')}>
+                  <CardMedia component="img" height="200" image={poleTelcoImg} alt="Télécommunications et Cybersécurité" />
+                  <CardContent sx={{ p: 3, textAlign: 'center' }}>
+                    <NetworkCheckIcon color="primary" sx={{ fontSize: 50, mb: 2 }} />
+                    <Typography variant="h4" component="h3" gutterBottom>Pôle Telco & IT</Typography>
+                    <Typography variant="body1" color="text.secondary">Haut niveau d'expertise pour opérateurs et intégrateurs. Performance, résilience et conformité de l'architecture à la sécurisation des systèmes.</Typography>
                   </CardContent>
                 </CardActionArea>
               </Card>

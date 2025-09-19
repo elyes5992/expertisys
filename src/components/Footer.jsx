@@ -55,7 +55,7 @@ const Footer = () => {
           </Grid>
 
           {/* Column 2: Quick Links */}
-          <Grid size={{xs:12 ,sm:6 ,md:2}}>
+          <Grid size={{xs:6 ,sm:6 ,md:2}}>
             <Typography variant="h6" sx={{ color: 'white', mb: 2 }}>
               Navigation
             </Typography>
@@ -65,7 +65,7 @@ const Footer = () => {
           </Grid>
 
           {/* Column 3: Services */}
-          <Grid size={{xs:12 ,sm:6 ,md:3}}>
+          <Grid size={{xs:6 ,sm:6 ,md:3}}>
             <Typography variant="h6" sx={{ color: 'white', mb: 2 }}>
               Nos Services
             </Typography>

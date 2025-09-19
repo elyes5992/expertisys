@@ -23,7 +23,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 // --- Import Icons ---
-import logo from '../assets/logo.png'; 
+import logo from '../assets/logoo.png'; 
 import { KeyboardArrowDown, ExpandLess, ExpandMore } from '@mui/icons-material'; // --- NEW --- Added Expand icons
 import SyncAltIcon from '@mui/icons-material/SyncAlt';
 import ArchitectureIcon from '@mui/icons-material/Architecture';
@@ -75,6 +75,7 @@ const Navbar = () => {
 
   const timeoutRef = useRef(null);
   
+  
   const navigate = useNavigate();
 
   // --- NEW --- MUI hooks to handle responsiveness
@@ -120,7 +121,7 @@ const Navbar = () => {
         sx: {
           width: '75%',
           maxWidth: '300px',
-          bgcolor: 'rgba(255, 255, 255, 0.9)', 
+          bgcolor: 'rgba(255, 255, 255, 0.5)', 
           backdropFilter: 'blur(10px)',
         }
       }}
@@ -276,11 +277,11 @@ const Navbar = () => {
   );
 
   return (
-    <AppBar position="sticky" sx={{ bgcolor: 'rgba(255, 255, 255, 0.9)', backdropFilter: 'blur(10px)', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+    <AppBar position="sticky" sx={{ bgcolor: 'rgba(255, 255, 255, 0.79)', backdropFilter: 'blur(10px)', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
           <Link to="/">
-            <Box component="img" sx={{ height: 70, cursor: 'pointer' }} alt="Expertisys Logo" src={logo} />
+            <Box component="img" sx={{ height: 80, cursor: 'pointer' }} alt="Expertisys Logo" src={logo} />
           </Link>
 
           {/* --- NEW --- Conditional rendering based on screen size */}
