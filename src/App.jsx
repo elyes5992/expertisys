@@ -12,6 +12,7 @@ import MecaniqueStatique from './pages/services/MecaniqueStatique';
 import TelcoCyber from './pages/services/TelcoCyber';
 import About from './pages/About';
 import Formulaire from './pages/Formulaire';
+import ScrollToTop from './components/ScrollToTop'; 
 
 function App() {
   const location = useLocation();
@@ -19,6 +20,7 @@ function App() {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Navbar />
+       <ScrollToTop />
       <Box component="main" sx={{ flexGrow: 1 }}>
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
